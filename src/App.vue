@@ -15,5 +15,6 @@ export default {
       display: flex;
       justify-content: space-between;
       height: 100vh;
+      overflow-x: hidden;
     }
 </style>

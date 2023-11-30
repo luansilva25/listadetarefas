@@ -46,7 +46,7 @@
   </div>
   <div class="finalizados">
     <h1>finalizados</h1>
-    <div class="finalizado" v-for="finalizado in finalizados" :key="index">
+    <div class="finalizado" v-for="(finalizado, index) in finalizados" :key="index">
       <p>{{ finalizado }}</p>
       <input type="button" value="🗑️" @click="removerFinalizado(index)" />
     </div>
@@ -74,18 +74,19 @@ export default {
       }
     },
     finalizar: function (index) {
+      if(this.editar === index){
+        alert('voce não podera finalizar sem salvar')
+      }else{
       this.finalizados.push(this.tarefas[index]);
       this.tarefas.splice(index, 1);
+      }
+     
     },
     removerTarefa: function (index) {
       this.tarefas.splice(index, 1);
-      let removertarefa = document.querySelector(".aguarde");
-      removertarefa.style.display = "none";
     },
     removerFinalizado: function (index) {
       this.finalizados.splice(index, 1);
-      let removerfinalizado = document.querySelector(".finalizado");
-      removerfinalizado.style.display = "none";
     },
     edicao: function (index) {
       this.editar = index;
@@ -105,6 +106,7 @@ export default {
   flex-direction: column;
   gap: 10px;
   width: 400px;
+  margin-left: 20px;
 }
 #tarefa {
   width: 250px;
@@ -160,6 +162,7 @@ export default {
 .finalizados {
   height: 500px;
   width: 400px;
+  margin-right: 20px;
 }
 .finalizados h1 {
   text-align: center;
@@ -171,7 +174,7 @@ export default {
   height: 70px;
   width: 400px;
   box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.58);
-  margin-left: 10px;
+  margin-left: 20px;
   padding: 10px;
 }
 .finalizado input {
